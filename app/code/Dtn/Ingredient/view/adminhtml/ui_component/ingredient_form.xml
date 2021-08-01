@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<form xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd">
+    <argument name="data" xsi:type="array">
+        <item name="js_config" xsi:type="array">
+            <item name="provider" xsi:type="string">ingredient_form.ingredient_form_data_source</item>
+        </item>
+        <item name="label" xsi:type="string" translate="true">General Information</item>
+        <item name="template" xsi:type="string">templates/form/collapsible</item>
+    </argument>
+    <!-- Mapping Data  with Ui component -->
+    <settings>
+        <!-- Adding Save and Delete and other button at here -->
+        <buttons>
+            <button name="save" class="Dtn\Ingredient\Block\Adminhtml\Ingredient\SaveButton"/>
+            <button name="back" class="Dtn\Ingredient\Block\Adminhtml\Ingredient\BackButton"/>
+            <button name="reset" class="Dtn\Ingredient\Block\Adminhtml\Ingredient\ResetButton"/>
+        </buttons>
+        <namespace>ingredient_form</namespace>
+        <dataScope>data</dataScope>
+        <deps>
+            <dep>ingredient_form.ingredient_form_data_source</dep>
+        </deps>
+    </settings>
+    <!-- define Data source Name-->
+    <!-- source name formar == UIComponentFilename_data_source -->
+    <dataSource name="ingredient_form_data_source">
+        <argument name="data" xsi:type="array">
+            <item name="js_config" xsi:type="array">
+                <item name="component" xsi:type="string">Magento_Ui/js/form/provider</item>
+            </item>
+        </argument>
+        <settings>
+            <!--Save Url -->
+            <submitUrl path="dtn/ingredient/save"/>
+        </settings>
+        <!-- Declare Data provide Php class and it user defined Class-->
+        <dataProvider class="Dtn\Ingredient\Ui\Model\IngredientProvider" name="ingredient_form_data_source">
+            <settings>
+                <requestFieldName>ingredient_id</requestFieldName>
+                <primaryFieldName>ingredient_id</primaryFieldName>
+            </settings>
+        </dataProvider>
+    </dataSource>
+    <fieldset name="general">
+        <settings>
+            <label translate="true">Product Ingredient</label>
+        </settings>
+      <!-- First Field Should be Primary key -->
+        <field name="ingredient_id" formElement="input">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="source" xsi:type="string">ingredient_form</item>
+                </item>
+            </argument>
+            <settings>
+                <dataType>text</dataType>
+                <visible>false</visible>
+                <dataScope>ingredient_id</dataScope>
+            </settings>
+        </field>
+        <field name="name" formElement="input">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <!-- source is user defined -->
+                    <item name="source" xsi:type="string">ingredient_form</item>
+                </item>
+            </argument>
+            <settings>
+                <validation>
+                    <rule name="required-entry" xsi:type="boolean">true</rule>
+                </validation>
+                <dataType>text</dataType>
+                <label translate="true">Name</label>
+                <dataScope>name</dataScope>
+            </settings>
+        </field>
+
+        <field name="description" formElement="textarea">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <!-- source is user defined -->
+                    <item name="source" xsi:type="string">ingredient_form</item>
+                </item>
+            </argument>
+            <settings>
+                <validation>
+                    <rule name="required-entry" xsi:type="boolean">true</rule>
+                </validation>
+                <dataType>text</dataType>
+                <label translate="true">Desciption</label>
+                <dataScope>description</dataScope>
+            </settings>
+        </field>
+
+        <colorPicker name="color" class="Magento\Ui\Component\Form\Element\ColorPicker" component="Magento_Ui/js/form/element/color-picker">
+            <settings>
+                <label translate="true">Color</label>
+                <elementTmpl>ui/form/element/color-picker</elementTmpl>
+                <colorFormat>rgb</colorFormat>
+                <colorPickerMode>full</colorPickerMode>
+                <dataScope>color</dataScope>
+            </settings>
+        </colorPicker>
+
+        <field name="image" formElement="imageUploader">
+            <settings>
+                <notice translate="true">Please Upload Image</notice>
+                <label translate="true">Image</label>
+                <componentType>imageUploader</componentType>
+            </settings>
+            <formElements>
+                <imageUploader>
+                    <settings>
+                        <allowedExtensions>jpg jpeg gif png</allowedExtensions>
+                        <maxFileSize>20971520000</maxFileSize>
+                        <uploaderConfig>
+                            <param xsi:type="string" name="url">dtn/ingredient/uploader</param>
+                        </uploaderConfig>
+                    </settings>
+                </imageUploader>
+            </formElements>
+        </field>
+    </fieldset>
+</form>

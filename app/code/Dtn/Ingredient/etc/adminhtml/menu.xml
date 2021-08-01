@@ -1,0 +1,21 @@
+<?xml version="1.0" ?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+    <menu>
+        <add
+        id="Dtn_Ingredient::main_menu"
+        title="Manage Ingredient"
+        module="Dtn_Ingredient"
+        sortOrder="99"
+        parent="Magento_Catalog::catalog"
+        resource="Dtn_Ingredient::ingredient" />
+
+        <add
+        id="Dtn_Ingredient::ingredient"
+        title="Ingredient"
+        module="Dtn_Ingredient"
+        sortOrder="99"
+        parent="Dtn_Ingredient::main_menu"
+        resource="Dtn_Ingredient::ingredient"
+        action="dtn/ingredient/index" />
+    </menu>
+</config>

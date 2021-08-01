@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<body>
+    <referenceContainer name="product.info.social">
+        <block class="Dtn\Ingredient\Block\Product\View\Ingredients"
+            name="ingrdient"
+            template="Dtn_Ingredient::ingredient.phtml">
+        </block>
+    </referenceContainer>
+</body>
